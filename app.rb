@@ -1,6 +1,7 @@
 require "sinatra"
 require "fileutils"
 require "zip"
+require "securerandom"
 
 get "/" do
   erb :index
@@ -10,10 +11,14 @@ helpers do
   def timestamp
     Time.now.strftime("%Y%m%d%H%M%S")
   end
+
+  def random_str
+    SecureRandom.hex(4)
+  end
 end
 
 post "/skeleton" do
-  d = "#{settings.root}/tmp/4.1.0/Rails4.1.0_#{timestamp}"
+  d = "#{settings.root}/tmp/4.1.0/Rails4.1.0_#{timestamp}_#{random_str}"
   s = "#{settings.root}/skeletons/4.1.0/commons"
   e = "#{settings.root}/skeletons/4.1.0/erb"
 
