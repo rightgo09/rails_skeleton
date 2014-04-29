@@ -19,7 +19,7 @@ end
 
 post "/skeleton" do
   d = "#{settings.root}/tmp/4.1.0/Rails4.1.0_#{timestamp}_#{random_str}"
-  s = "#{settings.root}/skeletons/4.1.0/commons"
+  s = "#{settings.root}/skeletons/4.1.0/common"
   e = "#{settings.root}/skeletons/4.1.0/erb"
 
   FileUtils.rm_r(d) if Dir.exist?(d)
