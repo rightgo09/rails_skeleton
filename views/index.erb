@@ -7,15 +7,37 @@
   <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-  <form method="post" action="/skeleton">
-    <div>
-      App Name<input type="text" name="app_name">
+  <div class="container">
+    <div class="page-header">
+      <h1>Rails Skeleton</h1>
     </div>
-    <div>
-      <input type="radio" name="database" value="mysql">MySQL
-      <input type="radio" name="database" value="sqlite3">SQLite3
+
+    <div class="row">
+      <form method="post" action="/skeleton" role="form" class="form-horizontal">
+        <div class="form-group">
+          <label for="app_name" class="col-md-2 control-label">Application Name</label>
+          <div class="col-md-4">
+            <input type="text" class="form-control" id="app_name" placeholder="Bone">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="database" class="col-md-2 control-label">Database</label>
+          <div class="col-md-10">
+            <label class="radio-inline">
+              <input type="radio" id="database_sqlite3" name="database" value="sqlite3" selected> SQLite3
+            </label>
+            <label class="radio-inline">
+              <input type="radio" id="database_mysql" name="database" value="mysql"> MySQL
+            </label>
+          </div>
+        </div>
+        <div class="form-group" style="margin-top:60px">
+          <div class="col-md-offset-2 col-md-10">
+            <button type="submit" class="btn btn-lg btn-default">Download</button>
+          </div>
+        </div>
+      </form>
     </div>
-    <button class="btn btn-lg btn-primary">ダウンロード</button>
-  </form>
+  </div>
 </body>
 </html>
