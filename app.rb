@@ -47,8 +47,9 @@ post "/skeleton" do
   @database = params[:database]
   @testing_framework = params[:testing_framework]
   @template_engine = params[:template_engine]
-  @bootstrap = params[:bootstrap]
   @stylesheet = params[:stylesheet]
+  @turbolinks = params[:turbolinks]
+  @bootstrap = params[:bootstrap]
 
   d = "#{settings.root}/tmp/4.1.0/Rails4.1.0_#{timestamp}_#{random_str}"
   s = "#{settings.root}/skeletons/4.1.0/common"
