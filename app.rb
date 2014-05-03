@@ -67,6 +67,7 @@ post "/skeleton" do
   r = ->(org, new = org) { File.write("#{d}/#{new}", ERB.new(File.read("#{e}/#{org}")).result(binding)) }
   r.call("Gemfile")
   r.call("config/application.rb")
+  r.call("app/assets/javascripts/application.js")
   r.call("app/assets/stylesheets/application.css", "app/assets/stylesheets/application.css.#{@stylesheet}")
   if @template_engine == "erb"
     r.call("app/views/layouts/application.html.erb", "app/views/layouts/application.html.erb")
