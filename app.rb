@@ -46,6 +46,8 @@ post "/skeleton" do
   @app_name = params[:app_name]
   @database = params[:database]
   @testing_framework = params[:testing_framework]
+  @bootstrap = params[:bootstrap]
+  @stylesheet = params[:stylesheet]
 
   d = "#{settings.root}/tmp/4.1.0/Rails4.1.0_#{timestamp}_#{random_str}"
   s = "#{settings.root}/skeletons/4.1.0/common"
@@ -61,9 +63,10 @@ post "/skeleton" do
     cp_r("#{t}/spec/spec", d)
   end
 
-  r = ->(f) { File.write("#{d}/#{f}", ERB.new(File.read("#{e}/#{f}")).result(binding)) }
+  r = ->(org, new = org) { File.write("#{d}/#{new}", ERB.new(File.read("#{e}/#{org}")).result(binding)) }
   r.call("Gemfile")
   r.call("config/application.rb")
+  r.call("app/assets/stylesheets/application.css", "app/assets/stylesheets/application.css.#{@stylesheet}")
 
   d_zip = "#{d}.zip"
   zip_r(d_zip, d)
