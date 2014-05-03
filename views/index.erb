@@ -11,23 +11,33 @@
     <div class="page-header">
       <h1>Rails Skeleton</h1>
     </div>
-
     <div class="row">
       <form method="post" action="/skeleton" role="form" class="form-horizontal">
         <div class="form-group">
           <label for="app_name" class="col-md-2 control-label">Application Name</label>
           <div class="col-md-4">
-            <input type="text" class="form-control" id="app_name" name="app_name" placeholder="Bone">
+            <input type="text" class="form-control" id="app_name" name="app_name" placeholder="Bone" required>
           </div>
         </div>
         <div class="form-group">
           <label for="database" class="col-md-2 control-label">Database</label>
           <div class="col-md-10">
             <label class="radio-inline">
-              <input type="radio" id="database_sqlite3" name="database" value="sqlite3" selected> SQLite3
+              <input type="radio" id="database_sqlite3" name="database" value="sqlite3" checked> SQLite3
             </label>
             <label class="radio-inline">
               <input type="radio" id="database_mysql" name="database" value="mysql"> MySQL
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="testing_framework" class="col-md-2 control-label">Testing Framework</label>
+          <div class="col-md-10">
+            <label class="radio-inline">
+              <input type="radio" id="testing_framework_rspec" name="testing_framework" value="rspec" checked> RSpec
+            </label>
+            <label class="radio-inline">
+              <input type="radio" id="testing_framework_test_unit" name="testing_framework" value="test_unit"> Test::Unit
             </label>
           </div>
         </div>
