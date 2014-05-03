@@ -46,6 +46,7 @@ post "/skeleton" do
   @app_name = params[:app_name]
   @database = params[:database]
   @testing_framework = params[:testing_framework]
+  @template_engine = params[:template_engine]
   @bootstrap = params[:bootstrap]
   @stylesheet = params[:stylesheet]
 
@@ -67,6 +68,13 @@ post "/skeleton" do
   r.call("Gemfile")
   r.call("config/application.rb")
   r.call("app/assets/stylesheets/application.css", "app/assets/stylesheets/application.css.#{@stylesheet}")
+  if @template_engine == "erb"
+    r.call("app/views/layouts/application.html.erb", "app/views/layouts/application.html.erb")
+  elsif @template_engine == "haml"
+    r.call("app/views/layouts/application.html.haml", "app/views/layouts/application.html.haml")
+  elsif @template_engine == "slim"
+    r.call("app/views/layouts/application.html.slim", "app/views/layouts/application.html.slim")
+  end
 
   d_zip = "#{d}.zip"
   zip_r(d_zip, d)
