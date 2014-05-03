@@ -85,5 +85,5 @@ post "/skeleton" do
   d_zip = "#{d}.zip"
   zip_r(d_zip, d)
 
-  send_file(d_zip, filename: File.basename(d_zip))
+  send_file(d_zip, filename: "#{@app_name}.zip")
 end
