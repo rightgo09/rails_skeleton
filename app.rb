@@ -69,7 +69,11 @@ post "/skeleton" do
   r.call("Gemfile")
   r.call("config/application.rb")
   r.call("app/assets/javascripts/application.js")
-  r.call("app/assets/stylesheets/application.css", "app/assets/stylesheets/application.css.#{@stylesheet}")
+  if @stylesheet == "scss"
+    r.call("app/assets/stylesheets/application.css", "app/assets/stylesheets/application.css.scss")
+  elsif @stylesheet == "sass"
+    r.call("app/assets/stylesheets/application.css", "app/assets/stylesheets/application.css.sass")
+  end
   if @template_engine == "erb"
     r.call("app/views/layouts/application.html.erb", "app/views/layouts/application.html.erb")
   elsif @template_engine == "haml"
