@@ -74,11 +74,47 @@ describe Skeleton410 do
       it do
         expect(gemfile).to match(/^gem 'turbolinks'/)
       end
+      context "with erb" do
+        let(:template_engine){ "erb" }
+        it do
+          expect(File.read("#{spec_tmp_dir}/app/views/layouts/application.html.erb")).to match(/data-turbolinks-track/)
+        end
+      end
+      context "with haml" do
+        let(:template_engine){ "haml" }
+        it do
+          expect(File.read("#{spec_tmp_dir}/app/views/layouts/application.html.haml")).to match(/data-turbolinks-track/)
+        end
+      end
+      context "with slim" do
+        let(:template_engine){ "slim" }
+        it do
+          expect(File.read("#{spec_tmp_dir}/app/views/layouts/application.html.slim")).to match(/data-turbolinks-track/)
+        end
+      end
     end
     context "without turbolinks" do
       let(:turbolinks){ "not_use" }
       it do
         expect(gemfile).to match(/^#gem 'turbolinks'/)
+      end
+      context "with erb" do
+        let(:template_engine){ "erb" }
+        it do
+          expect(File.read("#{spec_tmp_dir}/app/views/layouts/application.html.erb")).not_to match(/data-turbolinks-track/)
+        end
+      end
+      context "with haml" do
+        let(:template_engine){ "haml" }
+        it do
+          expect(File.read("#{spec_tmp_dir}/app/views/layouts/application.html.haml")).not_to match(/data-turbolinks-track/)
+        end
+      end
+      context "with slim" do
+        let(:template_engine){ "slim" }
+        it do
+          expect(File.read("#{spec_tmp_dir}/app/views/layouts/application.html.slim")).not_to match(/data-turbolinks-track/)
+        end
       end
     end
     context "with bootstrap" do
