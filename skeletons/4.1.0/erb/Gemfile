@@ -3,13 +3,13 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.0'
-<% if @database == "mysql" %>
+<%- if @database == "mysql" -%>
 # Use mysql as the database for Active Record
 gem 'mysql2'
-<% else %>
+<%- else -%>
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
-<% end %>
+<%- end -%>
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
@@ -43,22 +43,20 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-<% if @bootstrap == "use" %>
+<%- if @bootstrap == "use" -%>
 gem 'bootstrap-sass', '~> 3.1.1'
-<% end %>
-
-<% if @template_engine == "haml" %>
+<%- end -%>
+<%- if @template_engine == "haml" -%>
 gem 'haml-rails'
-<% elsif @template_engine == "slim" %>
+<%- elsif @template_engine == "slim" -%>
 gem "slim-rails"
-<% end %>
+<%- end -%>
+<%- if @rails_config == "use" -%>
+gem 'rails_config', '~> 0.4.1'
+<%- end -%>
 
-<% if @rails_config == "use" %>
-gem 'rails_config'
-<% end %>
-
-<% if @testing_framework == "rspec" %>
+<%- if @testing_framework == "rspec" -%>
 group :development, :test do
   gem 'rspec-rails', '~> 3.0.0.beta'
 end
-<% end %>
+<%- end -%>

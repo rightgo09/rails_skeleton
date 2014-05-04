@@ -14,10 +14,10 @@
  *= require_self
  */
 
-<% if @bootstrap == "use" %>
-  <% if @stylesheet == "sass" %>
+<%- if @bootstrap == "use" -%>
+  <%- if @stylesheet == "sass" -%>
 @import "bootstrap"
-  <% elsif @stylesheet == "scss" %>
+  <%- elsif @stylesheet == "scss" -%>
 @import "bootstrap";
-  <% end %>
-<% end %>
+  <%- end -%>
+<%- end -%>

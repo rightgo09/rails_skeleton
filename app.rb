@@ -70,7 +70,7 @@ post "/skeleton" do
     cp_r("#{c}/config", d)
   end
 
-  r = ->(org, new = org) { File.write("#{d}/#{new}", ERB.new(File.read("#{e}/#{org}")).result(binding)) }
+  r = ->(org, new = org) { File.write("#{d}/#{new}", ERB.new(File.read("#{e}/#{org}"), nil, '-').result(binding)) }
   r.call("Gemfile")
   r.call(".gitignore")
   r.call("config/application.rb")
