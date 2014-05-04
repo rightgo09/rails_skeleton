@@ -8,3 +8,7 @@ gem 'rubyzip'
 group :development do
   gem 'shotgun'
 end
+
+group :development, :test do
+  gem 'rspec'
+end
