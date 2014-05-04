@@ -51,6 +51,7 @@ post "/skeleton" do
   @turbolinks = params[:turbolinks]
   @bootstrap = params[:bootstrap]
   @rails_config = params[:rails_config]
+  @kaminari = params[:kaminari]
 
   d = "#{settings.root}/tmp/4.1.0/Rails4.1.0_#{timestamp}_#{random_str}"
   s = "#{settings.root}/skeletons/4.1.0/common"

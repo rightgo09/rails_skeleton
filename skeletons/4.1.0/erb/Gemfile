@@ -54,6 +54,9 @@ gem "slim-rails"
 <%- if @rails_config == "use" -%>
 gem 'rails_config', '~> 0.4.1'
 <%- end -%>
+<%- if @kaminari == "use" -%>
+gem 'kaminari'
+<%- end -%>
 
 <%- if @testing_framework == "rspec" -%>
 group :development, :test do
