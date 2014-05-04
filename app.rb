@@ -50,11 +50,13 @@ post "/skeleton" do
   @stylesheet = params[:stylesheet]
   @turbolinks = params[:turbolinks]
   @bootstrap = params[:bootstrap]
+  @rails_config = params[:rails_config]
 
   d = "#{settings.root}/tmp/4.1.0/Rails4.1.0_#{timestamp}_#{random_str}"
   s = "#{settings.root}/skeletons/4.1.0/common"
   e = "#{settings.root}/skeletons/4.1.0/erb"
   t = "#{settings.root}/skeletons/4.1.0/testing_framework"
+  c = "#{settings.root}/skeletons/4.1.0/rails_config"
 
   rm_r(d) if Dir.exist?(d)
   cp_r(s, d)
@@ -64,9 +66,13 @@ post "/skeleton" do
     cp("#{t}/spec/.rspec", d)
     cp_r("#{t}/spec/spec", d)
   end
+  if @rails_config == "use"
+    cp_r("#{c}/config", d)
+  end
 
   r = ->(org, new = org) { File.write("#{d}/#{new}", ERB.new(File.read("#{e}/#{org}")).result(binding)) }
   r.call("Gemfile")
+  r.call(".gitignore")
   r.call("config/application.rb")
   r.call("app/assets/javascripts/application.js")
   if @stylesheet == "scss"

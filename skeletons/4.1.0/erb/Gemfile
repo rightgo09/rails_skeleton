@@ -53,6 +53,10 @@ gem 'haml-rails'
 gem "slim-rails"
 <% end %>
 
+<% if @rails_config == "use" %>
+gem 'rails_config'
+<% end %>
+
 <% if @testing_framework == "rspec" %>
 group :development, :test do
   gem 'rspec-rails', '~> 3.0.0.beta'
