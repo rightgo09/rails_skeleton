@@ -1,3 +1,4 @@
 /.bundle
 /skeletons/**/Gemfile.lock
 /tmp/4.1.0/Rails*
+/coverage

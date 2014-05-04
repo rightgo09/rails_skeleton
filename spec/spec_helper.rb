@@ -1,3 +1,15 @@
+# refs. https://coveralls.io/docs/ruby
+require 'simplecov'
+require 'coveralls'
+
+SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
+  SimpleCov::Formatter::HTMLFormatter,
+  Coveralls::SimpleCov::Formatter
+]
+SimpleCov.start do
+  add_filter '/vendor/bundle'
+end
+
 require "./app"
 
 def spec_tmp_dir
