@@ -5,6 +5,8 @@ gem 'sinatra'
 gem 'thin'
 gem 'rubyzip'
 
+gem 'rake'
+
 group :development do
   gem 'shotgun'
 end
