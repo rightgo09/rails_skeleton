@@ -18,3 +18,20 @@ describe Skeleton do
     end
   end
 end
+
+describe Skeleton410 do
+  let(:params){ {
+    app_name: "Piyopiyo",
+  } }
+  describe "build!" do
+    let(:skeleton){ Skeleton410.new(params) }
+    before do
+      skeleton.instance_variable_set(:@dst, spec_tmp_dir)
+      skeleton.build!
+    end
+    it "should exist app name" do
+      application_rb = File.read("#{spec_tmp_dir}/config/application.rb")
+      expect(application_rb).to match(/module Piyopiyo/)
+    end
+  end
+end
