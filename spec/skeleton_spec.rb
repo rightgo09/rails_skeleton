@@ -305,6 +305,7 @@ describe Skeleton410 do
           files.delete_if { |f| f == entry.name }
         end
       end
+      p files unless files.empty?
       expect(files).to be_empty
     end
   end
