@@ -309,3 +309,21 @@ describe Skeleton410 do
     end
   end
 end
+
+describe "GET /" do
+  it do
+    get "/"
+    expect(res).to match(/<title>Rails Skeleton<\/title>/)
+  end
+end
+
+describe "POST /skeleton" do
+  before do
+    Skeleton410.any_instance.stub(:dst).and_return(spec_tmp_dir)
+  end
+  it do
+    post "/skeleton"
+    expect(res_header("Content-Type")).to eq "application/zip"
+    expect(res_header("Content-Length")).to eq File.size("#{spec_tmp_dir}.zip").to_s
+  end
+end

@@ -13,6 +13,7 @@ end
 
 group :development, :test do
   gem 'rspec'
+  gem 'rack-test'
   gem 'simplecov', require: false
   gem 'coveralls', require: false
 end

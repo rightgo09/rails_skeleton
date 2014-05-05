@@ -16,6 +16,8 @@ GEM
     rack (1.5.2)
     rack-protection (1.5.3)
       rack
+    rack-test (0.6.2)
+      rack (>= 1.0)
     rake (10.3.1)
     rest-client (1.6.7)
       mime-types (>= 1.16)
@@ -54,6 +56,7 @@ PLATFORMS
 
 DEPENDENCIES
   coveralls
+  rack-test
   rake
   rspec
   rubyzip
