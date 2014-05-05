@@ -29,6 +29,7 @@ describe Skeleton410 do
   let(:bootstrap){ nil }
   let(:template_engine){ nil }
   let(:kaminari){ nil }
+  let(:draper){ nil }
   let(:params){ {
     app_name: app_name,
     database: database,
@@ -39,6 +40,7 @@ describe Skeleton410 do
     rails_config: rails_config,
     stylesheet: stylesheet,
     kaminari: kaminari,
+    draper: draper,
   } }
   describe "build!" do
     let(:skeleton){ Skeleton410.new(params) }
@@ -206,6 +208,20 @@ describe Skeleton410 do
         expect(File.exist?("#{spec_tmp_dir}/config/settings/test.yml")).to be_false
         expect(File.exist?("#{spec_tmp_dir}/config/settings.local.yml")).to be_false
         expect(File.exist?("#{spec_tmp_dir}/config/settings.yml")).to be_false
+      end
+    end
+    context "with draper" do
+      let(:draper){ "use" }
+      it do
+        expect(gemfile).to match(/gem 'draper'/)
+        expect(File.exist?("#{spec_tmp_dir}/app/decorators/application_decorator.rb")).to be_true
+      end
+    end
+    context "without draper" do
+      let(:draper){ "not_use" }
+      it do
+        expect(gemfile).not_to match(/gem 'draper'/)
+        expect(File.exist?("#{spec_tmp_dir}/app/decorators/application_decorator.rb")).to be_false
       end
     end
   end

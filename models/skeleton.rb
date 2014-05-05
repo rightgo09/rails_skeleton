@@ -26,12 +26,14 @@ class Skeleton410
     @bootstrap = params[:bootstrap]
     @rails_config = params[:rails_config]
     @kaminari = params[:kaminari]
+    @draper = params[:draper]
   end
 
   def build!
     common            = "#{src}/common"
     testing_framework = "#{src}/testing_framework"
     rails_config      = "#{src}/rails_config"
+    draper            = "#{src}/draper"
 
     rm_r(dst) if Dir.exist?(dst)
 
@@ -49,6 +51,11 @@ class Skeleton410
     # rails_config
     if @rails_config == "use"
       cp_r("#{rails_config}/config", dst)
+    end
+
+    # draper
+    if @draper == "use"
+      cp_r("#{draper}/app", dst)
     end
 
     [
