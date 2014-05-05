@@ -21,5 +21,9 @@ RSpec.configure do |config|
     if Dir.exist?(spec_tmp_dir)
       FileUtils.rm_r(spec_tmp_dir)
     end
+    zip_path = "#{spec_tmp_dir}.zip"
+    if File.exist?(zip_path)
+      FileUtils.rm(zip_path)
+    end
   end
 end

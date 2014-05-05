@@ -42,11 +42,13 @@ describe Skeleton410 do
     kaminari: kaminari,
     draper: draper,
   } }
-  describe "build!" do
-    let(:skeleton){ Skeleton410.new(params) }
+  let(:skeleton){ Skeleton410.new(params) }
+  before do
+    skeleton.instance_variable_set(:@dst, spec_tmp_dir)
+  end
+  describe "#build!" do
     let(:gemfile){ File.read("#{spec_tmp_dir}/Gemfile") }
     before do
-      skeleton.instance_variable_set(:@dst, spec_tmp_dir)
       skeleton.build!
     end
     it "should exist app name" do
@@ -223,6 +225,87 @@ describe Skeleton410 do
         expect(gemfile).not_to match(/gem 'draper'/)
         expect(File.exist?("#{spec_tmp_dir}/app/decorators/application_decorator.rb")).to be_false
       end
+    end
+  end
+  describe "#zip!" do
+    before do
+      skeleton.build!
+      skeleton.zip!
+    end
+    it do
+      expect(File.exist?(skeleton.zip_path)).to be_true
+      files = [
+        "app/",
+        "app/assets/",
+        "app/assets/images/",
+        "app/assets/javascripts/",
+        "app/assets/javascripts/application.js",
+        "app/assets/stylesheets/",
+        "app/controllers/",
+        "app/controllers/application_controller.rb",
+        "app/controllers/concerns/",
+        "app/helpers/",
+        "app/helpers/application_helper.rb",
+        "app/mailers/",
+        "app/models/",
+        "app/models/concerns/",
+        "app/views/",
+        "app/views/layouts/",
+        "bin/",
+        "bin/bundle",
+        "bin/rails",
+        "bin/rake",
+        "config/",
+        "config/application.rb",
+        "config/boot.rb",
+        "config/database.yml",
+        "config/environment.rb",
+        "config/environments/",
+        "config/environments/development.rb",
+        "config/environments/production.rb",
+        "config/environments/test.rb",
+        "config/initializers/",
+        "config/initializers/backtrace_silencers.rb",
+        "config/initializers/cookies_serializer.rb",
+        "config/initializers/filter_parameter_logging.rb",
+        "config/initializers/inflections.rb",
+        "config/initializers/mime_types.rb",
+        "config/initializers/session_store.rb",
+        "config/initializers/wrap_parameters.rb",
+        "config/locales/",
+        "config/locales/en.yml",
+        "config/routes.rb",
+        "config/secrets.yml",
+        "config.ru",
+        "db/",
+        "db/seeds.rb",
+        "Gemfile",
+        "lib/",
+        "lib/assets/",
+        "lib/tasks/",
+        "log/",
+        "public/",
+        "public/404.html",
+        "public/422.html",
+        "public/500.html",
+        "public/favicon.ico",
+        "public/robots.txt",
+        "Rakefile",
+        "README.rdoc",
+        "tmp/",
+        "tmp/cache/",
+        "tmp/cache/assets/",
+        "vendor/",
+        "vendor/assets/",
+        "vendor/assets/javascripts/",
+        "vendor/assets/stylesheets/",
+      ]
+      Zip::File.open(skeleton.zip_path) do |zip_file|
+        zip_file.each do |entry|
+          files.delete_if { |f| f == entry.name }
+        end
+      end
+      expect(files).to be_empty
     end
   end
 end
