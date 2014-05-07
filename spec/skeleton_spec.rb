@@ -20,6 +20,7 @@ describe Skeleton do
 end
 
 describe Skeleton410 do
+  let(:rails_version){ nil }
   let(:app_name){ "Piyopiyo" }
   let(:database){ nil }
   let(:testing_framework){ nil }
@@ -31,6 +32,7 @@ describe Skeleton410 do
   let(:kaminari){ nil }
   let(:draper){ nil }
   let(:params){ {
+    rails_version: rails_version,
     app_name: app_name,
     database: database,
     testing_framework: testing_framework,
@@ -54,6 +56,18 @@ describe Skeleton410 do
     it "should exist app name" do
       application_rb = File.read("#{spec_tmp_dir}/config/application.rb")
       expect(application_rb).to match(/module Piyopiyo/)
+    end
+    context "with 4.1.0" do
+      let(:rails_version){ "4.1.0" }
+      it do
+        expect(gemfile).to match(/gem 'rails', '4.1.0'/)
+      end
+    end
+    context "with 4.1.1" do
+      let(:rails_version){ "4.1.1" }
+      it do
+        expect(gemfile).to match(/gem 'rails', '4.1.1'/)
+      end
     end
     context "with mysql" do
       let(:database){ "mysql" }
@@ -323,7 +337,7 @@ describe "POST /skeleton" do
     Skeleton410.any_instance.stub(:dst).and_return(spec_tmp_dir)
   end
   it do
-    post "/skeleton"
+    post "/skeleton", rails_version: "4.1.1"
     expect(res_header("Content-Type")).to eq "application/zip"
     expect(res_header("Content-Length")).to eq File.size("#{spec_tmp_dir}.zip").to_s
   end

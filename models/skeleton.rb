@@ -3,6 +3,8 @@ class Skeleton
     case version
     when "4.1.0"
       Skeleton410.new(params)
+    when "4.1.1"
+      Skeleton410.new(params)
     else
       raise "No skeleton"
     end
@@ -17,6 +19,7 @@ class Skeleton410
   attr_reader :app_name
 
   def initialize(params)
+    @rails_version = params[:rails_version]
     @app_name = params[:app_name]
     @database = params[:database]
     @testing_framework = params[:testing_framework]

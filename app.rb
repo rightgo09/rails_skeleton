@@ -6,7 +6,7 @@ get "/" do
 end
 
 post "/skeleton" do
-  skeleton = Skeleton.skeleton("4.1.0", params)
+  skeleton = Skeleton.skeleton(params[:rails_version], params)
   skeleton.build!
   skeleton.zip!
 
