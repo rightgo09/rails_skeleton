@@ -91,6 +91,7 @@ describe Skeleton410 do
       let(:turbolinks){ "use" }
       it do
         expect(gemfile).to match(/^gem 'turbolinks'/)
+        expect(File.read("#{spec_tmp_dir}/app/assets/javascripts/application.js")).to match(/\/\/= require turbolinks/)
       end
       context "with erb" do
         let(:template_engine){ "erb" }
@@ -115,6 +116,7 @@ describe Skeleton410 do
       let(:turbolinks){ "not_use" }
       it do
         expect(gemfile).to match(/^#gem 'turbolinks'/)
+        expect(File.read("#{spec_tmp_dir}/app/assets/javascripts/application.js")).not_to match(/\/\/= require turbolinks/)
       end
       context "with erb" do
         let(:template_engine){ "erb" }

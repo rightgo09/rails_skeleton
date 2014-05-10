@@ -12,7 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
+<%- if @turbolinks == "use" -%>
 //= require turbolinks
+<%- end -%>
 <%- if @bootstrap == "use" -%>
 //= require bootstrap
 <%- end -%>
